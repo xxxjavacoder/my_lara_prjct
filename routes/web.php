@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,8 +16,12 @@ Route::get('/login', [SessionController::class , 'show']);
 Route::post('/login', [SessionController::class , 'login']);
 Route::get('/logout', [SessionController::class , 'logout']);
 
-Route::get('/prices', function () {
-    return view('prices');
+Route::get('/services', function () {
+    if (Auth::check()) {
+        return view('services');
+    } else {
+        return redirect('/login');
+    }
 });
 
 Route::get('/about-us', function () {
