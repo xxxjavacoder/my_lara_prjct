@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,10 @@ Route::post('/login', [SessionController::class , 'login']);
 Route::get('/logout', [SessionController::class , 'logout']);
 
 Route::get('/services', function () {
+    $posts = Posts::all();
+
     if (Auth::check()) {
-        return view('services');
+        return view('services', ['posts' => $posts]);
     } else {
         return redirect('/login');
     }
