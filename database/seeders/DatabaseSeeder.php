@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Posts;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Factories\PostsFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +21,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Posts::factory(10)->create();
+        $this->call([PartSeeder::class, PostsSeeder::class, AutoSeeder::class, AutoPartSeeder::class]);
     }
 }
