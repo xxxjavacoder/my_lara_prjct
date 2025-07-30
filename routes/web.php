@@ -22,7 +22,7 @@ Route::get('/news', [Posts::class , 'index']);
 Route::get('/news/{id}', [Posts::class , 'show']);
 
 Route::controller(PartController::class)->group(function () {
-    Route::get('/parts', 'index')->middleware(['auth']);
+    Route::get('/parts', 'index')->middleware(['auth'])->name('parts.index');
 });
 
 Route::get('/about-us', function () {

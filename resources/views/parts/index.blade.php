@@ -1,4 +1,17 @@
 <x-layout heading="Marketplace">
+
+    <form method="GET" action="{{ route('parts.index') }}">
+        <label for="series">Марка авто:</label>
+        <select name="series" id="series" onchange="this.form.submit()">
+            <option value="">Усі марки</option>
+            @foreach($series as $model)
+                <option value="{{ $model }}" {{ request('series') == $model ? 'selected' : '' }}>
+                    {{ $model }}
+                </option>
+            @endforeach
+        </select>
+    </form>
+
     @foreach($parts as $part)
         <div class="card mx-2 mb-2">
             <div class="card-body">
@@ -23,4 +36,6 @@
             </div>
         </div>
     @endforeach
+
+    {{ $parts->links() }}
 </x-layout>
