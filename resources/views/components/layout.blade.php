@@ -14,6 +14,11 @@
                     <x-nav.nav-item :active="request()->is('/')" href="/">
                         Home
                     </x-nav.nav-item>
+                    @auth()
+                        <x-nav.nav-item :active="request()->is('/parts')" href="/parts">
+                            Parts
+                        </x-nav.nav-item>
+                    @endauth
                     <x-nav.nav-item :active="request()->is('news')" href="/news">
                         News
                     </x-nav.nav-item>
