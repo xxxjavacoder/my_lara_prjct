@@ -17,15 +17,8 @@ Route::get('/login', [SessionController::class , 'show']);
 Route::post('/login', [SessionController::class , 'login']);
 Route::get('/logout', [SessionController::class , 'logout']);
 
-Route::get('/services', function () {
-    $posts = Posts::all();
-
-    if (Auth::check()) {
-        return view('services', ['posts' => $posts]);
-    } else {
-        return redirect('/login');
-    }
-});
+Route::get('/news', [Posts::class , 'index']);
+Route::get('/news/{id}', [Posts::class , 'show']);
 
 Route::get('/about-us', function () {
     return view('about-us');
