@@ -19,7 +19,7 @@
                         <x-nav.nav-item :active="request()->is('/parts')" href="/parts">
                             Parts
                         </x-nav.nav-item>
-                        <x-nav.nav-item :active="request()->is('forum')" href="/forum">
+                        <x-nav.nav-item :active="request()->is('posts')" href="/posts">
                             Forum
                         </x-nav.nav-item>
                     @endauth

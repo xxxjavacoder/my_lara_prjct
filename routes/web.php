@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\PartController;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
@@ -18,13 +18,13 @@ Route::get('/login', [SessionController::class , 'show'])->name('login');
 Route::post('/login', [SessionController::class , 'login']);
 Route::get('/logout', [SessionController::class , 'logout']);
 
-Route::get('/forum', [PostsController::class , 'index'])->middleware('auth');
-Route::get('/forum/create', [PostsController::class , 'create'])->middleware('auth');
-Route::post('/forum/create', [PostsController::class , 'store'])->middleware('auth');
-Route::get('/forum/{post}', [PostsController::class , 'show'])->middleware('auth');
-Route::get('/forum/{post}/edit', [PostsController::class , 'edit'])->middleware('auth');
-Route::patch('/forum/{post}/edit', [PostsController::class , 'update'])->middleware('auth');
-Route::delete('/forum/{post}', [PostsController::class , 'destroy'])->middleware('auth');
+Route::get('/posts', [PostController::class , 'index'])->middleware('auth');
+Route::get('/posts/create', [PostController::class , 'create'])->middleware('auth');
+Route::post('/posts/create', [PostController::class , 'store'])->middleware('auth');
+Route::get('/posts/{post}', [PostController::class , 'show'])->middleware('auth');
+Route::get('/posts/{post}/edit', [PostController::class , 'edit'])->middleware('auth')->can('edit', 'post');
+Route::patch('/posts/{post}/edit', [PostController::class , 'update'])->middleware('auth')->can('edit', 'post');;
+Route::delete('/posts/{post}', [PostController::class , 'destroy'])->middleware('auth')->can('edit', 'post');;
 
 Route::controller(PartController::class)->group(function () {
     Route::get('/parts', 'index')->middleware('auth')->name('parts.index');

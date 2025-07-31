@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Auto;
 use App\Models\Part;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

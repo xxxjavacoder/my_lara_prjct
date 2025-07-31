@@ -1,5 +1,5 @@
 <x-layout heading="Create new Post">
-    <form method="POST" action="/forum/create">
+    <form method="POST" action="/posts/create">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title:</label>
@@ -17,7 +17,7 @@
             @enderror
         </div>
 
-        <a class="btn btn-error" href="/forum">Cancel</a>
+        <a class="btn btn-error" href="/posts">Cancel</a>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </x-layout>
