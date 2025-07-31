@@ -6,11 +6,13 @@ use App\Models\Auto;
 use App\Models\Part;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PartController extends Controller
 {
     public function index(Request $request) {
         $series = $request->input('series');
+        $modelCode = $request->input('model_code');
 
         $parts = Part::query()
             ->when($series, function ($query) use ($series) {
@@ -18,12 +20,25 @@ class PartController extends Controller
                     $q->where('series', $series);
                 });
             })
+            ->when($modelCode, function ($query) use ($modelCode) {
+                $query->whereHas('autos', function ($q) use ($modelCode) {
+                    $q->where('model_code', $modelCode);
+                });
+            })
             ->with('autos')
             ->paginate(5);
 
-        // Отримуємо всі бренди авто для селектора
-        $series = Auto::distinct()->pluck('series');
+        $seriesList = Auto::distinct()->pluck('series');
 
-        return view('parts.index', compact('parts', 'series'));
+        if ($series) {
+            $model_code = DB::table('autos')
+                ->where('series', $series)
+                ->distinct()
+                ->pluck('model_code');
+        } else {
+            $model_code = collect();
+        }
+
+        return view('parts.index', compact('parts', 'seriesList', 'model_code'));
     }
 }

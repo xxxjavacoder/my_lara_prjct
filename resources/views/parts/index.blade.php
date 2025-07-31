@@ -1,15 +1,28 @@
 <x-layout heading="Marketplace">
 
     <form method="GET" action="{{ route('parts.index') }}">
-        <label for="series">Марка авто:</label>
-        <select name="series" id="series" onchange="this.form.submit()">
-            <option value="">Усі марки</option>
-            @foreach($series as $model)
-                <option value="{{ $model }}" {{ request('series') == $model ? 'selected' : '' }}>
-                    {{ $model }}
-                </option>
-            @endforeach
-        </select>
+        <form method="GET" action="{{ route('parts.index') }}">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <select class="form-select" name="series" onchange="this.form.submit()">
+                        <option value="">-- Виберіть серію --</option>
+                        @foreach ($seriesList as $item)
+                            <option value="{{ $item }}" {{ request('series') == $item ? 'selected' : '' }}>{{ $item }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-auto">
+                    @if ($model_code->isNotEmpty())
+                        <select class="form-select" name="model_code" onchange="this.form.submit()">
+                            <option value="">-- Виберіть модель --</option>
+                            @foreach ($model_code as $code)
+                                <option value="{{ $code }}" {{ request('model_code') == $code ? 'selected' : '' }}>{{ $code }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                </div>
+            </div>
+        </form>
     </form>
 
     @foreach($parts as $part)
