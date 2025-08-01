@@ -23,8 +23,8 @@ Route::get('/posts/create', [PostController::class , 'create'])->middleware('aut
 Route::post('/posts/create', [PostController::class , 'store'])->middleware('auth');
 Route::get('/posts/{post}', [PostController::class , 'show'])->middleware('auth');
 Route::get('/posts/{post}/edit', [PostController::class , 'edit'])->middleware('auth')->can('edit', 'post');
-Route::patch('/posts/{post}/edit', [PostController::class , 'update'])->middleware('auth')->can('edit', 'post');;
-Route::delete('/posts/{post}', [PostController::class , 'destroy'])->middleware('auth')->can('edit', 'post');;
+Route::patch('/posts/{post}/edit', [PostController::class , 'update'])->middleware('auth')->can('edit', 'post');
+Route::delete('/posts/{post}', [PostController::class , 'destroy'])->middleware('auth')->can('edit', 'post');
 
 Route::controller(PartController::class)->group(function () {
     Route::get('/parts', 'index')->middleware('auth')->name('parts.index');

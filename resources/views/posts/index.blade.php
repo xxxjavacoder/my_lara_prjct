@@ -14,4 +14,5 @@
             </a>
         @endforeach
     </div>
+    {{ $posts->links() }}
 </x-layout>
