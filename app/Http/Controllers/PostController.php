@@ -34,7 +34,7 @@ class PostController extends Controller
 //        ]);
 
         $post = Post::make([
-            'title' => request()->safe(['title']),
+            'title' => request('title'),
             'description' => request('description')
         ]);
 
